@@ -38,6 +38,6 @@ Running the Main class it should show a menu that looks as follows.
 
 #### Miscellaneus:
  
-- Java 8 
+- Java8 
 - JUnit5
 - Maven
