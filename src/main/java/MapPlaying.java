@@ -19,8 +19,47 @@ public class MapPlaying {
 
     public static void main(String[] args) throws IOException {
 
+        Scanner in = new Scanner(System.in);
+        Scanner path = new Scanner(System.in);
+
+        // print menu
+        System.out.println("Welcome to this sorting Bob's burgeoning fortune challenge.");
+        System.out.println("Choose an option.");
+        System.out.println("1. Calculate default.");
+        System.out.println("2. Calculate but specify Path file location.");
+        System.out.println("If you want to exit click 0");
+
+        // handle user commands
+        boolean quit = false;
+        int menuItem;
+        do {
+            System.out.println();
+            System.out.print("Choose menu item: ");
+            menuItem = in.nextInt();
+            switch (menuItem) {
+                case 1:
+                    calculateBobFortune(BOBS_CRYPTO_TXT);
+                    break;
+                case 2:
+                    System.out.print("Write file location: ");
+                    String source = path.next();
+                    calculateBobFortune(source);
+                    break;
+                case 0:
+                    quit = true;
+                    break;
+            }
+        } while (!quit);
+
+        System.out.println("Bye-bye!");
+
+
+    }
+
+    public static void calculateBobFortune(String file) throws IOException {
+
         //1 Read file and store it into a List
-        List<String> lines = readFileIntoList(BOBS_CRYPTO_TXT);
+        List<String> lines = readFileIntoList(file);
         Map<String, Double> kvs = new HashMap<>();
 
         //2 Creates a Map -> (CurrencyName, Value) from the lines
