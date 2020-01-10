@@ -25,8 +25,8 @@ public class MapPlaying {
         // print menu
         System.out.println("Welcome to this sorting Bob's burgeoning fortune challenge.");
         System.out.println("Choose an option.");
-        System.out.println("1. Calculate default.");
-        System.out.println("2. Calculate but specify Path file location.");
+        System.out.println("1. Calculate default, file under resources folder.");
+        System.out.println("2. Calculate but specify Bob´s file location.");
         System.out.println("If you want to exit click 0");
 
         // handle user commands
@@ -52,8 +52,6 @@ public class MapPlaying {
         } while (!quit);
 
         System.out.println("Bye-bye!");
-
-
     }
 
     public static void calculateBobFortune(String file) throws IOException {
