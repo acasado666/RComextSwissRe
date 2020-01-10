@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -9,7 +8,7 @@ import java.nio.file.Paths;
 import java.text.NumberFormat;
 import java.util.*;
 
-public class MapPlaying {
+public class Main {
 
     public static final String BOBS_CRYPTO_TXT = "src/main/resources/bobs_crypto.txt";
 
@@ -58,10 +57,20 @@ public class MapPlaying {
 
         //1 Read file and store it into a List
         List<String> lines = readFileIntoList(file);
+
+        // Checks we have data
+        if (lines == null) {
+            System.out.println();
+            System.out.println("Let´s try again ...");
+            System.out.println();
+            System.exit(0);
+        }
+
         Map<String, Double> kvs = new HashMap<>();
 
         //2 Creates a Map -> (CurrencyName, Value) from the lines
-        createMap(lines, kvs);
+        if (lines.size() >= 0)
+            createMap(lines, kvs);
 
         //3 looping Map over keys
         for (String currencyName : kvs.keySet()) {
@@ -98,11 +107,15 @@ public class MapPlaying {
     }
 
     public static List<String> readFileIntoList(String fileName) throws IOException {
-
-        Path path = Paths.get(fileName);
-        System.out.println("file exists = [" + Files.exists(path) + "]");
-        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-        return lines;
+        try {
+            Path path = Paths.get(fileName);
+            System.out.println("file exists = [" + Files.exists(path) + "]");
+            List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+            return lines;
+        } catch (IOException e) {
+            System.out.println("File not found.");
+        }
+        return null;
     }
 
     public static void createMap(List<String> lines, Map<String, Double> kvs) {
